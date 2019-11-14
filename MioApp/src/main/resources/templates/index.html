@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Main Page</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<a th:href="@{/logout}" type="button" name="action"
+		class="btn btn-primary" value="Cancel"><i>Logout</i></a>
+	<div th:switch="${apps}" class="container my-5">
+		<div class="row">
+			<div class="col-md-6">
+				<h2 th:case="null">Main Page!</h2>
+
+				<p>
+				<div sec:authorize="hasRole('admin')">
+					<fieldset>
+						<h5>Add new bus, route or driver</h5>
+						<p>
+							<a href="/admin/add/bus"><i class="fas fa-bus ml-2"></i>
+								Add new Bus</a>
+						</p>
+						<p>
+							<a href="/admin/add/route"><i class="fas fa-bus-alt ml-2"></i>
+								Add new Route</a>
+						</p>
+						<p>
+							<a href="/admin/add/driver"><i class="fas fa-user-edit ml-2"></i>
+								Add new Driver</a>
+						</p>
+					</fieldset>
+				</div>
+				</p>
+
+
+
+				<div sec:authorize="hasRole('admin') OR hasRole('operator')">
+					<fieldset>
+						<h5>Search bus, route or driver</h5>
+
+						<p>
+							<a href="/app/buses"><i class="fas fa-bus ml-2"></i>
+								Buses</a>
+						</p>
+						<p>
+							<a href="/app/routes"><i class="fas fa-bus-alt ml-2"></i>
+								Routes</a>
+						</p>
+
+						<p>
+							<a href="/app/drivers"><i class="fas fa-user ml-2"></i>
+								Drivers</a>
+						</p>
+						<p>
+							<a href="/app/services"><i class="fas fa-th-list ml-2"></i>
+								Services</a>
+						</p>
+					</fieldset>
+				</div>
+
+				<div sec:authorize="hasRole('operator')">
+					<fieldset>
+						<h5>Create Service</h5>
+
+						<p>
+							<a href="/operator/add/service"><i
+								class="fas fa-th-list ml-2"></i> Add new service</a>
+						</p>
+					</fieldset>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>
