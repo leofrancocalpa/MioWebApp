@@ -23,7 +23,7 @@ public class BusServiceImp implements BusService{
 	
 	@Transactional(readOnly=false)
 	public boolean save(Tmio1Bus bus) throws Exception{
-		if(!busRepository.findById(bus.getId()).isEmpty()) {
+		if((busDao.findById(bus.getId())!=null)) {
 			throw new RuntimeException("Ya existe un bus con ese Id");
 		}
 		if(bus.getCapacidad().intValue()<=0) {
