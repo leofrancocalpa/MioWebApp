@@ -43,7 +43,8 @@ public class BusController {
 		}
 		try {
 			System.out.println("Id "+bus.getId());
-			System.out.println("Guardo bus:: Id "+bus.getId()+busService.save(bus));
+			System.out.println("Guardo bus:: Id "+bus.getId());
+			busService.save(bus);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 //			e.printStackTrace();

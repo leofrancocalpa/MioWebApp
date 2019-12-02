@@ -50,6 +50,7 @@ public class ServicioController {
 		serv.setId(servPK);
 		serv.setTmio1Bus(busService.findById(servPK.getIdBus()));
 		serv.setTmio1Conductore(conductorService.getConductor(servPK.getCedulaConductor()));
+		servPK.setHash(servPK.hashCode());
 		serv.setTmio1Ruta(rutaService.getRuta(servPK.getIdRuta()));
 		if (!action.equals("Cancel")) {
 			if (bindingResult.hasErrors()) {
@@ -105,7 +106,7 @@ public class ServicioController {
 		model.addAttribute("conductores", conductorService.findAll());
 		model.addAttribute("servicio", serv);
 
-		return "search/service";
+		return "search/servicio";
 	}
 
 	@GetMapping("/operator/update/service/{id}")
@@ -119,7 +120,7 @@ public class ServicioController {
 		model.addAttribute("rutas", rutaService.findAll());
 		model.addAttribute("conductores", conductorService.findAll());
 		model.addAttribute("servicio", serv);
-		return "search/updateservice";
+		return "search/updateservicio";
 	}
 	
 	@PostMapping("/operator/update/save/service")

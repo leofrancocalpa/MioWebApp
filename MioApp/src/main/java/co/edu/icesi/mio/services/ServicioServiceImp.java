@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.edu.icesi.mio.model.Tmio1Bus;
 import co.edu.icesi.mio.model.Tmio1Conductore;
@@ -30,6 +31,7 @@ public class ServicioServiceImp implements ServicioService {
 	private RutasRepository rutaRepository;
 
 	@Override
+	@Transactional(readOnly=false)
 	public boolean save(Tmio1Servicio service) throws Exception {
 		if (service.getTmio1Bus() == null || service.getTmio1Conductore() == null || service.getTmio1Ruta() == null) {
 			throw new Exception("El servicio no puede ser creado con datos nulos");
@@ -85,6 +87,7 @@ public class ServicioServiceImp implements ServicioService {
 	}
 
 	@Override
+	@Transactional(readOnly=false)
 	public Tmio1Servicio updateServicio(Tmio1Servicio servicio) {
 //		servicioRepository.deleteById(servicio.getId());
 		servicioRepository.save(servicio);
@@ -92,36 +95,41 @@ public class ServicioServiceImp implements ServicioService {
 	}
 
 	@Override
+	@Transactional(readOnly=false)
 	public boolean deleteService(Tmio1ServicioPK id) {
 		servicioRepository.deleteById(id);
 		return true;
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public Tmio1Servicio getService(String id) {
 //		return servicioRepository.findById(id);
 		return null;
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public List<Tmio1Servicio> findAll() {
 		return servicioRepository.findAll();
 	}
 	
 	@Override
+	@Transactional(readOnly=true)
 	public Tmio1Servicio findByHashCode(int hashCode) {
 		List<Tmio1Servicio> services = servicioRepository.findAll();
 		Tmio1Servicio service = null;
 		for(Tmio1Servicio serv : services) {
 			if(serv.getId().hashCode()==hashCode) {
 				System.out.println("Encontrado:::");
-				service = serv;
+				return serv;
 			}
 		}
 		return service;
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public List<Tmio1Servicio> findByDate(LocalDate fechaInicio, LocalDate fechaFin) {
 		// TODO Auto-generated method stub
 		List<Tmio1Servicio> services = servicioRepository.findAll();
