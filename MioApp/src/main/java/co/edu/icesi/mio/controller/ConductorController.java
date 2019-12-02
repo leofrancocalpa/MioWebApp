@@ -40,7 +40,7 @@ public class ConductorController {
 			}
 		}
 		if (action.equals("Cancel")) {
-			return "redirect:/";
+			return "redirect:/app/drivers";
 		}
 		try {
 			System.out.println("Id "+cond.getCedula());
@@ -52,7 +52,7 @@ public class ConductorController {
 			return "redirect:/admin/add/bus";
 		}
 //		System.out.println(busService.findAll().get(0));
-		return "redirect:/";
+		return "redirect:/app/drivers";
 	}
 	
 	@GetMapping("/app/drivers")
@@ -62,7 +62,7 @@ public class ConductorController {
 	}
 	
 	@GetMapping("/app/search/driver/{id}")
-	public String showUpdateForm(@PathVariable("id") String id, Model model) {
+	public String showInfoForm(@PathVariable("id") String id, Model model) {
 		Tmio1Conductore conductor = conductorService.getConductor(id);
 		if (conductor == null)
 			throw new IllegalArgumentException("Invalid user Id:" + id);
@@ -70,19 +70,49 @@ public class ConductorController {
 		return "search/conductor";
 	}
 	
+	@GetMapping("/admin/update/driver/{id}")
+	public String showUpdateForm(@PathVariable("id") String id, Model model) {
+		Tmio1Conductore conductor = conductorService.getConductor(id);
+		if (conductor == null)
+			throw new IllegalArgumentException("Invalid user Id:" + id);
+		model.addAttribute("conductor", conductor);
+		return "update/updateconductor";
+	}
+	
 	@PostMapping("/admin/update/driver")
+	public String showUpdateForm1(@Valid Tmio1Conductore conductor, Model model,
+			@RequestParam(value = "action", required = true) String action) {
+		if (conductor == null)
+			throw new IllegalArgumentException("Invalid user Id:");
+		
+		if(action.equals("Cancel")) {
+			return "redirect:/app/drivers";
+		}
+		model.addAttribute("conductor", conductor);
+		return "update/updateconductor";
+	}
+	
+	@PostMapping("/admin/update/driver1")
 	public String updateRuta(@Valid Tmio1Conductore conductor, BindingResult bindingResult,
 			@RequestParam(value = "action", required = true) String action, Model model) {
 
 		if (!action.equals("Cancel")) {
 			if(bindingResult.hasErrors()) {
-				return "add/addbus";
+				return "update/updateconductor";
 			}
 		}
 		if (action.equals("Cancel")) {
 			return "redirect:/app/drivers";
 		}
-		return "redirect:/";
+		conductorService.updateConductor(conductor);
+		return "redirect:/app/drivers";
+	}
+	
+	@GetMapping("/admin/del/driver/{id}")
+	public String delete(@PathVariable("id") String id) {
+		conductorService.deleteConductor(id);
+		
+		return "redirect:/app/drivers";
 	}
 
 }

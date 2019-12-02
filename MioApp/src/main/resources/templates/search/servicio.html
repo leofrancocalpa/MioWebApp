@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Service</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<a th:href="@{/logout}" type="button" class="btn btn-primary"><i>Logout</i></a>
+	<div class="container my-5">
+		<h2 class="mb-5">Service</h2>
+		<div class="row">
+			<div class="col-md-6">
+				<form action="#" th:action="@{/operator/update/service}"
+					th:object="${servicio}" method="post">
+					<div class="row">
+
+						<input type="hidden" readonly="readonly" th:field="*{id.hash}"
+							class="form-control" id="id" placeholder="hash" />
+						<div class="form-group col-md-6">
+							<label for="tmio1Bus" class="col-form-label">Buses</label> <input
+								readonly="readonly" class="form-control-range"
+								th:field="*{tmio1Bus.placa}" /> <span
+								th:if="${#fields.hasErrors('tmio1Bus')}" th:errors="*{tmio1Bus}"
+								class="text-danger"></span>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="tmio1Conductore" class="col-form-label">Conductores</label>
+							<input class="form-control-range" readonly="readonly"
+								th:field="*{tmio1Conductore.cedula}" />
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="tmio1Ruta" class="col-form-label">Rutas</label> <input
+								readonly="readonly" class="form-control-range"
+								th:field="*{tmio1Ruta.numero}">
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="fechaInicio" class="col-form-label">Fecha
+								Inicio</label> <input readonly="readonly" type="date"
+								th:field="*{id.fechaInicio}" class="form-control"
+								id="fechaInicio"> <span
+								th:if="${#fields.hasErrors('id.fechaInicio')}"
+								th:errors="*{id.fechaInicio}" class="text-danger"></span>
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="fechaFin" class="col-form-label">Fecha Fin</label> <input
+								readonly="readonly" type="date" th:field="*{id.fechaFin}"
+								class="form-control" id="fechaFin"> <span
+								th:if="${#fields.hasErrors('id.fechaFin')}"
+								th:errors="*{id.fechaFin}" class="text-danger"></span>
+						</div>
+
+
+					</div>
+					<div class="row">
+						<div class="col-md-4 mt-3" sec:authorize="hasRole('operator')">
+							<input type="submit" name="action" class="btn btn-primary"
+								value="Update">
+						</div>
+						<div class="col-md-4 mt-3" sec:authorize="hasRole('operator')">
+							<input type="submit" name="action" class="btn btn-primary"
+								value="Cancel">
+						</div>
+
+						<div class="col-md-3 mt-3" sec:authorize="hasRole('admin')">
+							<a th:href="@{/app/services}" type="button"
+								class="btn btn-secondary"><i>Back</i></a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

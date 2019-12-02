@@ -12,18 +12,20 @@ public class Tmio1SitiosRutaPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
 
+	private int hash;
+	
 	@Column(name="id_sitio", insertable=false, updatable=false)
-	private Integer idSitio;
+	private Long idSitio;
 
 	@Column(name="id_ruta", insertable=false, updatable=false)
 	private Integer idRuta;
 
 	public Tmio1SitiosRutaPK() {
 	}
-	public Integer getIdSitio() {
+	public Long getIdSitio() {
 		return this.idSitio;
 	}
-	public void setIdSitio(Integer idSitio) {
+	public void setIdSitio(Long idSitio) {
 		this.idSitio = idSitio;
 	}
 	public Integer getIdRuta() {
@@ -53,5 +55,11 @@ public class Tmio1SitiosRutaPK implements Serializable {
 		hash = hash * prime + this.idRuta.hashCode();
 		
 		return hash;
+	}
+	public int getHash() {
+		return hash;
+	}
+	public void setHash(int hash) {
+		this.hash = hash;
 	}
 }

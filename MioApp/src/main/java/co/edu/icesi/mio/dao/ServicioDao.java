@@ -15,7 +15,7 @@ import co.edu.icesi.mio.model.Tmio1Ruta;
 import co.edu.icesi.mio.model.Tmio1Servicio;
 
 @Repository
-public class ServicioConsultasAdicionalesDao implements IServicioDao{
+public class ServicioDao implements IServicioDao{
 	
 	@PersistenceContext
 	private EntityManager entityManager;
