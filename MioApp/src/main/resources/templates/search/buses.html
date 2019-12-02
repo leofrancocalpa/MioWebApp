@@ -32,6 +32,7 @@
 								<th>Modelo</th>
 								<th>Capacidad</th>
 								<th>More Info</th>
+								<th sec:authorize="hasRole('admin')">Update</th>
 								<th sec:authorize="hasRole('admin')">Delete</th>
 							</tr>
 						</thead>
@@ -44,6 +45,8 @@
 								<td class="text-info" th:text="${bus.capacidad}"></td>
 								<td><a th:href="@{/app/search/bus/{id}(id=${bus.id})}"
 									class="btn btn-primary"><i class="fas fa-bus ml-2"></i></a></td>
+									<td sec:authorize="hasRole('admin')"><a th:href="@{/admin/update/bus/{id}(id=${bus.id})}"
+									class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
 								<td sec:authorize="hasRole('admin')"><a th:href="@{/admin/del/bus/{id}(id=${bus.id})}"
 									class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
 							</tr>

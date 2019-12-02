@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Driver</title>
+<title>Update Driver</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -19,10 +19,10 @@
 	<a th:href="@{/logout}" type="button" 
 		class="btn btn-primary" ><i>Logout</i></a>
 	<div class="container my-5">
-		<h2 class="mb-5">Driver</h2>
+		<h2 class="mb-5">Update Driver</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/admin/update/driver}"
+				<form action="#" th:action="@{/admin/update/driver1}"
 					th:object="${conductor}" method="post">
 					<div class="row">
 						<div class="form-group col-md-6">
@@ -32,28 +32,28 @@
 						</div>
 						<div class="form-group col-md-6">
 							<label for="nombre" class="col-form-label">Nombre</label> <input
-								readonly="readonly" type="text" th:field="*{nombre}" class="form-control"
+								type="text" th:field="*{nombre}" class="form-control"
 								id="nombre" placeholder="Nombre" /> <span
 								th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
 								class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="apellidos" class="col-form-label">Apellidos</label> <input
-								readonly="readonly" type="text" th:field="*{apellidos}" class="form-control"
+								type="text" th:field="*{apellidos}" class="form-control"
 								id="apellidos" placeholder="Apellidos" /> <span
 								th:if="${#fields.hasErrors('apellidos')}"
 								th:errors="*{apellidos}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="fechaNacimineto" class="col-form-label">Fecha
-								Nacimiento</label> <input type="date" readonly="readonly" th:field="*{fechaNacimiento}"
+								Nacimiento</label> <input type="date" th:field="*{fechaNacimiento}"
 								class="form-control" id="fechaNacimiento"> <span
 								th:if="${#fields.hasErrors('fechaNacimiento')}"
 								th:errors="*{fechaNacimiento}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="fechaContratacion" class="col-form-label">Fecha
-								Contratacion</label> <input type="date" readonly="readonly" th:field="*{fechaContratacion}"
+								Contratacion</label> <input type="date" th:field="*{fechaContratacion}"
 								class="form-control" id="fechaContratacion"> <span
 								th:if="${#fields.hasErrors('fechaContratacion')}"
 								th:errors="*{fechaContratacion}" class="text-danger"></span>
@@ -64,7 +64,7 @@
 					<div class="row">
 						<div class="col-md-4 mt-3" sec:authorize="hasRole('admin')">
 							<input type="submit" name="action" class="btn btn-primary"
-								value="Update">
+								value="Save">
 						</div>
 						<div class="col-md-3 mt-3" sec:authorize="hasRole('admin')">
 							<input type="submit" name="action" class="btn btn-secondary"

@@ -54,21 +54,21 @@
 						</div>
 						<div class="form-group col-md-6">
 							<label for="diaInicio" class="col-form-label">Dia de
-								Inicio</label> <input readonly="readonly" type="text" th:field="*{diaInicio}"
+								Inicio</label> <input readonly="readonly" type="number" th:field="*{diaInicio}"
 								class="form-control" id="diaInicio" placeholder="01/01/2000">
 							<span th:if="${#fields.hasErrors('diaInicio')}"
 								th:errors="*{diaInicio}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="diaFin" class="col-form-label">Dia de Fin</label> <input
-								readonly="readonly" type="text" th:field="*{diaFin}" class="form-control"
+								readonly="readonly" type="number" th:field="*{diaFin}" class="form-control"
 								id="diaFin" placeholder="02/01/2000"> <span
 								th:if="${#fields.hasErrors('diaFin')}" th:errors="*{diaFin}"
 								class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="horaInicio" class="col-form-label">Hora de
-								Inicio</label> <input readonly="readonly" type="text" th:field="*{horaInicio}"
+								Inicio</label> <input readonly="readonly" type="number" th:field="*{horaInicio}"
 								class="form-control" id="horaInicio" placeholder="01/01/2000"
 								> <span
 								th:if="${#fields.hasErrors('diaInicio')}"
@@ -76,7 +76,7 @@
 						</div>
 						<div class="form-group col-md-6">
 							<label for="horaFin" class="col-form-label">Hora de Fin</label> <input
-								readonly="readonly" type="text" th:field="*{horaFin}" class="form-control"
+								readonly="readonly" type="number" th:field="*{horaFin}" class="form-control"
 								id="horaFin" placeholder="01/01/2000" > <span
 								th:if="${#fields.hasErrors('diaFin')}" th:errors="*{diaFin}"
 								class="text-danger"></span>
@@ -86,11 +86,8 @@
 					</div>
 					<div class="row">
 						<div class="col-md-4 mt-3" sec:authorize="hasRole('admin')">
-							<input disabled="disabled" type="submit" name="action" class="btn btn-primary"
+							<input type="submit" name="action" class="btn btn-primary"
 								value="Update">
-						</div>
-						<div class="col-md-3 mt-3" sec:authorize="hasRole('admin')">
-							<input type="button" class="btn btn-secondary" value="Edit">
 						</div>
 						<div class="col-md-3 mt-3" sec:authorize="hasRole('admin')">
 							<input type="submit" name="action" class="btn btn-secondary"

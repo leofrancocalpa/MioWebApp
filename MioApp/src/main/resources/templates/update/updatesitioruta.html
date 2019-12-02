@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Sitio Ruta</title>
+<title>Update Sitio Ruta</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -20,13 +20,13 @@
 		<h2 class="mb-5">Update Sitio Ruta</h2>
 		<div class="row">
 			<div class="col-md-6">
-				<form action="#" th:action="@{/admin/update/sitio-ruta}"
-					th:object="${sitiorutaPK}" method="post">
+				<form action="#" th:action="@{/admin/update/sitio-ruta1}"
+					th:object="${sitioruta}" method="post">
 					<div class="row">
 
 						<div class="form-group col-md-6">
 							<label for="idSitio" class="col-form-label">Sitios</label> <select
-								class="form-control-range" th:field="*{idSitio}">
+								class="form-control-range" th:field="*{sitioruta.id.idSitio}">
 								<option th:each="sitio : ${sitios}" th:value="${sitio.id}"
 									class="form-control" th:text="${sitio.nombre}"
 									th:selected="${sitiorutaPK.idSitio=sitio.id}"></option>
@@ -36,7 +36,7 @@
 
 						<div class="form-group col-md-6">
 							<label for="idRuta" class="col-form-label">Rutas</label> <select
-								class="form-control-range" th:field="*{idRuta}">
+								class="form-control-range" th:field="*{sitioruta.id.idRuta}">
 								<option th:each="ruta : ${rutas}" th:value="${ruta.id}"
 									class="form-control" th:text="${ruta.numero}"
 									th:selected="${sitiorutaPK.idRuta=ruta.id}"></option>
@@ -49,7 +49,7 @@
 					<div class="row">
 						<div class="col-md-4 mt-3">
 							<input type="submit" name="action" class="btn btn-primary"
-								value="Add">
+								value="Save">
 						</div>
 						<div class="col-md-3 mt-3">
 							<input type="reset" class="btn btn-secondary" value="Clear">

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.edu.icesi.mio.dao.IServicioDao;
 import co.edu.icesi.mio.model.Tmio1Bus;
 import co.edu.icesi.mio.model.Tmio1Conductore;
 import co.edu.icesi.mio.model.Tmio1Ruta;
@@ -29,6 +30,8 @@ public class ServicioServiceImp implements ServicioService {
 	private BusesRepository busRepository;
 	@Autowired
 	private RutasRepository rutaRepository;
+	@Autowired
+	private IServicioDao servicioDao;
 
 	@Override
 	@Transactional(readOnly=false)
@@ -96,8 +99,9 @@ public class ServicioServiceImp implements ServicioService {
 
 	@Override
 	@Transactional(readOnly=false)
-	public boolean deleteService(Tmio1ServicioPK id) {
-		servicioRepository.deleteById(id);
+	public boolean deleteService(Tmio1Servicio servicio) {
+//		servicioRepository.deleteById(id);
+		servicioDao.delete(servicio);
 		return true;
 	}
 

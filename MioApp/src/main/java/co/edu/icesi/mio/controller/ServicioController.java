@@ -137,7 +137,7 @@ public class ServicioController {
 			return "redirect:/app/services";
 		}
 		Tmio1Servicio serv = servService.findByHashCode(servPK.getHash());
-		servService.deleteService(serv.getId());
+		servService.deleteService(serv);
 		servPK.setHash(servPK.hashCode());
 		serv.setTmio1Bus(busService.findById(servPK.getIdBus()));
 		serv.setTmio1Conductore(conductorService.getConductor(servPK.getCedulaConductor()));
@@ -150,6 +150,13 @@ public class ServicioController {
 //			e.printStackTrace();
 			System.out.println(e.getMessage()+" Error <<<< ");
 		}
+		return "redirect:/app/services";
+	}
+	
+	@GetMapping("/operator/del/service/{id}")
+	public String delete(@PathVariable("id") int id) {
+		Tmio1Servicio serv = servService.findByHashCode(id);
+		servService.deleteService(serv);
 		return "redirect:/app/services";
 	}
 

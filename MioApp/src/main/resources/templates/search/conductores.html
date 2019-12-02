@@ -32,7 +32,8 @@
 								<th>Fecha Nacimineto</th>
 								<th>Fecha Contratacion</th>
 								<th>More Info</th>
-								<th sec:authorize="hasRole('admin')">Del</th>
+								<th sec:authorize="hasRole('admin')">Edit</th>
+								<th sec:authorize="hasRole('admin')">Delete</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -44,7 +45,9 @@
 								<td class="text-info" th:text="${conductor.fechaContratacion}"></td>
 								<td><a th:href="@{/app/search/driver/{id}(id=${conductor.cedula})}"
 									class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-								<td sec:authorize="hasRole('admin')"><a th:href="@{/users/del/{id}(id=${conductor.cedula})}"
+									<td sec:authorize="hasRole('admin')"><a th:href="@{/admin/update/driver/{id}(id=${conductor.cedula})}"
+									class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+								<td sec:authorize="hasRole('admin')"><a th:href="@{/admin/del/driver/{id}(id=${conductor.cedula})}"
 									class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
 							</tr>
 						</tbody>

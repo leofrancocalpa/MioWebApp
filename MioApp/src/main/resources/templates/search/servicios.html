@@ -34,6 +34,7 @@
 								<th>Fecha Fin</th>
 								<th>More Info</th>
 								<th sec:authorize="hasRole('operator')">Edit</th>
+								<th sec:authorize="hasRole('operator')">Delete</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -48,6 +49,8 @@
 								<td><a th:href="@{/app/search/service/{id} (id=${servicio.id.hash})}"
 									class="btn btn-primary"><i class="fas fa-bus ml-2"></i></a></td>
 								<td sec:authorize="hasRole('operator')"><a th:href="@{/operator/update/service/{id} (id=${servicio.id.hash})}"
+									class="btn btn-primary"><i class="fas fa-bus ml-2"></i></a></td>
+									<td sec:authorize="hasRole('operator')"><a th:href="@{/operator/del/service/{id} (id=${servicio.id.hash})}"
 									class="btn btn-primary"><i class="fas fa-bus ml-2"></i></a></td>
 
 							</tr>

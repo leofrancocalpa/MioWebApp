@@ -57,7 +57,7 @@ public class SitioRutaController {
 			
 		}
 		if (action.equals("Cancel")) {
-			return "redirect:/";
+			return "redirect:/app/sitios-ruta";
 		}
 		try {
 			sitioRutaService.save(sitioRuta);
@@ -88,20 +88,24 @@ public class SitioRutaController {
 		return "search/sitioruta";
 	}
 	
-	@GetMapping("/admin/update/sitio-ruta/{id}")
-	public String showUpdateForm(@PathVariable("id") int id, Model model) {
-		Tmio1SitiosRuta sitioruta = sitioRutaService.findByHashCode(id);
+	@PostMapping("/admin/update/sitio-ruta")
+	public String showUpdateForm(@Valid Tmio1SitiosRuta sitioruta, Model model,
+			@RequestParam(value = "action", required = true) String action) {
+//		Tmio1SitiosRuta sitioruta = sitioRutaService.findByHashCode(id);
 		System.out.println(sitioruta+">>>>");
 		if (sitioruta == null)
-			throw new IllegalArgumentException("Invalid user Id:" + id);
+			throw new IllegalArgumentException("Invalid user Id:" );
+		if(action.equals("Cancel")) {
+			return "redirect:/app/sitios-ruta";
+		}
 		model.addAttribute("sitiorutaPK", sitioruta.getId());
 		model.addAttribute("rutas", rutaService.findAll());
 		model.addAttribute("sitios", sitioService.findAll());
 		model.addAttribute("sitioruta", sitioruta);
-		return "search/updatesitioruta";
+		return "update/updatesitioruta";
 	}
 	
-	@PostMapping("/admin/update/sitio-ruta")
+	@PostMapping("/admin/update/sitio-ruta1")
 	public String update(Model model, Tmio1SitiosRutaPK sitioRutaPK, BindingResult bindingResult,
 			@RequestParam(value = "action", required = true) String action) {
 		

@@ -38,7 +38,7 @@ public class SitiosController {
 			}
 		}
 		if (action.equals("Cancel")) {
-			return "redirect:/";
+			return "redirect:/app/sitios";
 		}
 		try {
 			sitioService.save(sitio);
@@ -47,7 +47,7 @@ public class SitiosController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "redirect:/";
+		return "redirect:/app/sitios";
 	}
 	
 	@GetMapping("/app/sitios")
@@ -65,6 +65,18 @@ public class SitiosController {
 	}
 	
 	@PostMapping("/admin/update/sitio")
+	public String showUpdateForm(@Valid Tmio1Sitio sitio, Model model,
+			@RequestParam(value = "action", required = true) String action) {
+		
+		if(action.equals("Cancel")) {
+			return "redirect:/app/sitios";
+		}
+		model.addAttribute("sitio", sitio);
+		
+		return "update/updatesitio";
+	}
+	
+	@PostMapping("/admin/update/sitio1")
 	public String updateSitio(@Valid Tmio1Sitio sitio , BindingResult bindingResult,
 			@RequestParam(value = "action", required = true) String action, Model model) {
 		if (!action.equals("Cancel")) {
@@ -75,6 +87,24 @@ public class SitiosController {
 		if (action.equals("Cancel")) {
 			return "redirect:/app/sitios";
 		}
+		try {
+			sitioService.update(sitio);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/app/sitios";
+	}
+	
+	@GetMapping("/admin/del/sitio/{id}")
+	public String delete(@PathVariable("id") long id) {
+		try {
+			sitioService.delete(sitioService.findById(id));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return "redirect:/app/sitios";
 	}
 

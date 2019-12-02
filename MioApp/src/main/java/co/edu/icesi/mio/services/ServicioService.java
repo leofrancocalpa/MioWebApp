@@ -15,7 +15,7 @@ public interface ServicioService {
 	public boolean save(Tmio1Servicio service, Tmio1Bus bus, Tmio1Conductore conductor, Tmio1Ruta ruta) throws Exception;
 	public boolean createServicio(String Id, Tmio1Bus bus, Tmio1Conductore conductor, Tmio1Ruta ruta) throws Exception;
 	public Tmio1Servicio updateServicio(Tmio1Servicio servicio);
-	public boolean deleteService(Tmio1ServicioPK id);
+	public boolean deleteService(Tmio1Servicio id);
 	public Tmio1Servicio getService(String id);
 	public Tmio1Servicio findByHashCode(int hashCode);
 	public List<Tmio1Servicio> findAll();

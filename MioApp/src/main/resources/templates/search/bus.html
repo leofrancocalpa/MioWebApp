@@ -16,8 +16,7 @@
 <link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
-	<a th:href="@{/logout}" type="button" 
-		class="btn btn-primary" ><i>Logout</i></a>
+
 	<div class="container my-5">
 		<h2 class="mb-5">Bus</h2>
 		<div class="row">
@@ -25,63 +24,59 @@
 				<form action="#" th:action="@{/admin/update/bus}" th:object="${bus}"
 					method="post">
 					<div class="row">
-						<label for="id" class="col-form-label">Id</label>
-						<input type="text" th:field="*{id}" readonly="readonly" class="form-control" id="id"
-							placeholder="id"> 
 
+						<input type="hidden" th:field="*{id}" class="form-control" id="id"
+							placeholder="id">
 						<div class="form-group col-md-6">
 							<label for="capacidad" class="col-form-label">Capacidad</label> <input
-								type="number" disabled="disabled" th:field="*{capacidad}" class="form-control" id="capacidad"
-								placeholder="Capacidad" /> <span
-								th:if="${#fields.hasErrors('capacidad')}" th:errors="*{capacidad}"
-								class="text-danger"></span>
+								type="number" readonly="readonly" th:field="*{capacidad}"
+								class="form-control" id="capacidad" placeholder="Capacidad" />
+							<span th:if="${#fields.hasErrors('capacidad')}"
+								th:errors="*{capacidad}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="marca" class="col-form-label">Marca</label> <input
-								type="text" disabled="disabled" th:field="*{marca}" class="form-control" id="marca"
-								placeholder="Marca" /> <span
-								th:if="${#fields.hasErrors('capacidad')}" th:errors="*{capacidad}"
-								class="text-danger"></span>
+								type="text" readonly="readonly" th:field="*{marca}"
+								class="form-control" id="marca" placeholder="Marca" /> <span
+								th:if="${#fields.hasErrors('capacidad')}"
+								th:errors="*{capacidad}" class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="modelo" class="col-form-label">Modelo</label> <input
-								type="number" disabled="disabled" th:field="*{modelo}" class="form-control" id="email"
-								placeholder="Modelo" /> <span
+								type="number" readonly="readonly" th:field="*{modelo}"
+								class="form-control" id="email" placeholder="Modelo" /> <span
 								th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"
 								class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="placa" class="col-form-label">Placa</label> <input
-								type="text" disabled="disabled" th:field="*{placa}" class="form-control" id="placa"
-								placeholder="Placa" /> <span
+								type="text" readonly="readonly" th:field="*{placa}"
+								class="form-control" id="placa" placeholder="Placa" /> <span
 								th:if="${#fields.hasErrors('placa')}" th:errors="*{email}"
 								class="text-danger"></span>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="tipo" class="col-form-label">Tipo</label> <input
-								type="text" disabled="disabled" th:field="*{tipo}" class="form-control" id="tipo"
-								placeholder="Tipo" /> <span
+								type="text" readonly="readonly" th:field="*{tipo}"
+								class="form-control" id="tipo" placeholder="Tipo" /> <span
 								th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"
 								class="text-danger"></span>
 						</div>
-						
-					
+
+
 					</div>
 					<div class="row">
 						<div class="col-md-4 mt-3" sec:authorize="hasRole('admin')">
-							<input  disabled="disabled" type="submit" name="action" class="btn btn-primary"
+							<input type="submit" name="action" class="btn btn-primary"
 								value="Update">
-						</div>
-						<div class="col-md-3 mt-3" sec:authorize="hasRole('admin')">
-							<input type="button" class="btn btn-secondary" value="Edit">
 						</div>
 						<div class="col-md-3 mt-3" sec:authorize="hasRole('admin')">
 							<input type="submit" name="action" class="btn btn-secondary"
 								value="Cancel">
 						</div>
 						<div class="col-md-3 mt-3" sec:authorize="hasRole('operator')">
-							<a th:href="@{/app/buses}" type="button" name="action" class="btn btn-primary"
-								value="Cancel"><i >Back</i></a>
+							<a th:href="@{/app/buses}" type="button" name="action"
+								class="btn btn-primary" value="Cancel"><i>Back</i></a>
 						</div>
 					</div>
 				</form>

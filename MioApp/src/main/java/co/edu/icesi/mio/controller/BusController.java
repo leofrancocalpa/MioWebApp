@@ -39,22 +39,17 @@ public class BusController {
 			}
 		}
 		if (action.equals("Cancel")) {
-			return "redirect:/";
+			return "redirect:/apps/buses";
 		}
 		try {
 			System.out.println("Id "+bus.getId());
 			System.out.println("Guardo bus:: Id "+bus.getId());
 			busService.save(bus);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			model.addAttribute("bus", bus);
 			System.out.println(e.getMessage()+" Error <<<< ");
-//			System.out.println(bindingResult.getFieldError().getDefaultMessage());
 			return "redirect:/admin/add/bus";
-//			return "add/addbus";
 		}
-		return "redirect:/";
+		return "redirect:/app/buses";
 	}
 	
 	@GetMapping("/app/buses")
@@ -64,7 +59,7 @@ public class BusController {
 	}
 	
 	@GetMapping("/app/search/bus/{id}")
-	public String showUpdateForm(@PathVariable("id") int id, Model model) {
+	public String showInfoForm(@PathVariable("id") int id, Model model) {
 		Tmio1Bus bus = busService.findById(id);
 		if (bus == null)
 			throw new IllegalArgumentException("Invalid user Id:" + id);
@@ -72,19 +67,47 @@ public class BusController {
 		return "search/bus";
 	}
 	
+	@GetMapping("/admin/update/bus/{id}")
+	public String showUpdateForm(@PathVariable("id") int id, Model model ) {
+		Tmio1Bus bus = busService.findById(id);
+		if (bus == null)
+			throw new IllegalArgumentException("Invalid user Id:" + id);
+		model.addAttribute("bus", bus);
+		return "update/updatebus";
+	}
+	
 	@PostMapping("/admin/update/bus")
+	public String showUpdateForm1(Model model, @Valid Tmio1Bus bus,
+			@RequestParam(value = "action", required = true) String action) {
+		if (bus == null)
+			throw new IllegalArgumentException("Invalid user Id:");
+		System.out.println(bus.getMarca()+" ::: "+bus.getPlaca());
+		if(action.equals("Cancel")) {
+			return "redirect:/app/buses";
+		}
+		model.addAttribute("bus", bus);
+		return "update/updatebus";
+	}
+	
+	@PostMapping("/admin/update/bus1")
 	public String updateBus(@Valid Tmio1Bus bus, BindingResult bindingResult,
 			@RequestParam(value = "action", required = true) String action, Model model) {
 
 		if (!action.equals("Cancel")) {
 			if(bindingResult.hasErrors()) {
-				return "add/addbus";
+				return "update/updatebus";
 			}
 		}
 		if (action.equals("Cancel")) {
 			return "redirect:/app/buses";
 		}
-//		busService.updateBus(bus);
+		busService.updateBus(bus);
+		return "redirect:/app/buses";
+	}
+	
+	@GetMapping("/admin/del/bus/{id}")
+	public String delete(@PathVariable("id") int id) {
+		busService.deleteBus(id);
 		return "redirect:/app/buses";
 	}
 	
