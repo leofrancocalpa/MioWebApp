@@ -92,12 +92,15 @@ public class SitioRutaController {
 	public String showUpdateForm(@Valid Tmio1SitiosRuta sitioruta, Model model,
 			@RequestParam(value = "action", required = true) String action) {
 //		Tmio1SitiosRuta sitioruta = sitioRutaService.findByHashCode(id);
-		System.out.println(sitioruta+">>>>");
+		System.out.println(sitioruta.getId().getHash()+">>>>");
 		if (sitioruta == null)
 			throw new IllegalArgumentException("Invalid user Id:" );
+		
 		if(action.equals("Cancel")) {
 			return "redirect:/app/sitios-ruta";
 		}
+		System.out.println(sitioruta.getId().getHash());
+		model.addAttribute("hash", sitioruta.getId().getHash());
 		model.addAttribute("sitiorutaPK", sitioruta.getId());
 		model.addAttribute("rutas", rutaService.findAll());
 		model.addAttribute("sitios", sitioService.findAll());
@@ -113,7 +116,9 @@ public class SitioRutaController {
 			
 			return "redirect:/app/sitios-ruta";
 		}
+		System.out.println(sitioRutaPK.getHash());
 		Tmio1SitiosRuta sitioRuta = sitioRutaService.findByHashCode(sitioRutaPK.getHash());
+		System.out.println(sitioRuta+" >>>> to delete");
 		try {
 			sitioRutaService.delete(sitioRuta);
 			sitioRutaPK.setHash(sitioRutaPK.hashCode());

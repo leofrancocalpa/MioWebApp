@@ -26,24 +26,18 @@
 					<table class="table table-striped table-responsive-md">
 						<thead>
 							<tr>
-								<!--	<th>Id</th> -->
 								<th>Sitio</th>
 								<th>Ruta</th>
 								<th>More Info</th>
-								<th sec:authorize="hasRole('admin')">Edit</th>
 								<th sec:authorize="hasRole('admin')">Del</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="sitioruta : ${sitiosrutas}">
-								<!--	<td class="text-info" th:text="${servicio.id}"></td> -->
 								<td class="text-info" th:text="${sitioruta.tmio1Sitio1.nombre}"></td>
 								<td class="text-info" th:text="${sitioruta.tmio1Ruta1.numero}"></td>
 								<td><a
 									th:href="@{/app/search/sitio-ruta/{id} (id=${sitioruta.id.hash})}"
-									class="btn btn-primary"><i class="fas fa-bus ml-2"></i></a></td>
-								<td sec:authorize="hasRole('admin')"><a
-									th:href="@{/admin/update/sitio-ruta/{id} (id=${sitioruta.id.hash})}"
 									class="btn btn-primary"><i class="fas fa-bus ml-2"></i></a></td>
 								<td sec:authorize="hasRole('admin')"><a
 									th:href="@{/admin/del/sitio-ruta/{id} (id=${sitioruta.id.hash})}"

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>Service</title>
+<title>Update Service</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -16,25 +16,28 @@
 <link rel="stylesheet" href="../css/shards.min.css">
 </head>
 <body>
-	<a th:href="@{/logout}" type="button" 
-		class="btn btn-primary" ><i>Logout</i></a>
+	<a th:href="@{/logout}" type="button" class="btn btn-primary"><i>Logout</i></a>
 	<div class="container my-5">
-		<h2 class="mb-5">Service</h2>
+		<h2 class="mb-5">Update Service</h2>
 		<div class="row">
+
 			<div class="col-md-6">
-				<form action="#" th:action="@{/operator/update/save/service}"
+			<h5 class="mb-5">Update Service</h5>
+				<form action="#" th:action="@{/operator/update/service1}"
 					th:object="${servicioPK}" method="post">
 					<div class="row">
-					
+
+						<input type="hidden" readonly="readonly" th:field="*{hash}"
+							class="form-control" id="id" placeholder="hash" />
 
 						<div class="form-group col-md-6">
 							<label for="idBus" class="col-form-label">Buses</label> <select
-								 class="form-control-range" th:field="*{idBus}">
+								class="form-control-range" th:field="*{idBus}">
 								<option th:each="bus : ${buses}" th:value="${bus.id}"
 									class="form-control" th:text="${bus.placa}"
 									th:selected="${servicioPK.idBus=bus.id}"></option>
-							</select> <span th:if="${#fields.hasErrors('idBus')}"
-								th:errors="*{idBus}" class="text-danger"></span>
+							</select> <span th:if="${#fields.hasErrors('idBus')}" th:errors="*{idBus}"
+								class="text-danger"></span>
 						</div>
 
 						<div class="form-group col-md-6">
@@ -54,8 +57,8 @@
 									class="form-control" th:text="${ruta.numero}"
 									th:selected="${servicioPK.idRuta=ruta.id}"></option>
 							</select>
-						</div> 
-						
+						</div>
+
 						<div class="form-group col-md-6">
 							<label for="fechaInicio" class="col-form-label">Fecha
 								Inicio</label> <input type="date" th:field="*{fechaInicio}"
@@ -63,20 +66,20 @@
 								th:if="${#fields.hasErrors('fechaInicio')}"
 								th:errors="*{fechaInicio}" class="text-danger"></span>
 						</div>
-						
+
 						<div class="form-group col-md-6">
-							<label for="fechaFin" class="col-form-label">Fecha
-								Fin</label> <input type="date" th:field="*{fechaFin}"
-								class="form-control" id="fechaFin"> <span
-								th:if="${#fields.hasErrors('fechaFin')}"
-								th:errors="*{fechaFin}" class="text-danger"></span>
+							<label for="fechaFin" class="col-form-label">Fecha Fin</label> <input
+								type="date" th:field="*{fechaFin}" class="form-control"
+								id="fechaFin"> <span
+								th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}"
+								class="text-danger"></span>
 						</div>
-						
+
 						<div class="form-group col-md-6">
-							<label for="hash" class="col-form-label">Hash</label> <input type="hidden" th:field="*{hash}"
-								class="form-control" id="hash"> <span
-								th:if="${#fields.hasErrors('hash')}"
-								th:errors="*{hash}" class="text-danger"></span>
+							<label for="hash" class="col-form-label">Hash</label> <input
+								type="hidden" th:field="*{hash}" class="form-control" id="hash">
+							<span th:if="${#fields.hasErrors('hash')}" th:errors="*{hash}"
+								class="text-danger"></span>
 						</div>
 
 
@@ -93,6 +96,47 @@
 					</div>
 				</form>
 			</div>
+			
+			<div class="col-md-6">
+			<h5 class="mb-5">datos actuales</h5>
+				<div class="form-group col-md-6">
+					<label for="tmio1Bus" class="col-form-label">Buses</label> <input
+						readonly="readonly" class="form-control-range"
+						th:field="*{servicio.tmio1Bus.placa}" /> <span
+						th:if="${#fields.hasErrors('servicio.tmio1Bus.placa')}"
+						th:errors="*{servicio.tmio1Bus.placa}" class="text-danger"></span>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="tmio1Conductore" class="col-form-label">Conductores</label>
+					<input class="form-control-range" readonly="readonly"
+						th:field="*{servicio.tmio1Conductore.cedula}" />
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="tmio1Ruta" class="col-form-label">Rutas</label> <input
+						readonly="readonly" class="form-control-range"
+						th:field="*{servicio.tmio1Ruta.numero}">
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="fechaInicio" class="col-form-label">Fecha
+						Inicio</label> <input readonly="readonly" type="date"
+						th:field="*{servicio.id.fechaInicio}" class="form-control"
+						id="fechaInicio"> <span
+						th:if="${#fields.hasErrors('servicio.id.fechaInicio')}"
+						th:errors="*{servicio.id.fechaInicio}" class="text-danger"></span>
+				</div>
+
+				<div class="form-group col-md-6">
+					<label for="fechaFin" class="col-form-label">Fecha Fin</label> <input
+						readonly="readonly" type="date" th:field="*{servicio.id.fechaFin}"
+						class="form-control" id="fechaFin"> <span
+						th:if="${#fields.hasErrors('servicio.id.fechaFin')}"
+						th:errors="*{servicio.id.fechaFin}" class="text-danger"></span>
+				</div>
+			</div>
+			
 		</div>
 	</div>
 </body>

@@ -19,14 +19,36 @@
 	<div class="container my-5">
 		<h2 class="mb-5">Update Sitio Ruta</h2>
 		<div class="row">
+
+			<div class="form-group col-md-6">
+				<label for="tmio1Sitio1" class="col-form-label">Sitio</label> <input
+					type="text" readonly="readonly"
+					th:field="*{sitioruta.tmio1Sitio1.nombre}" class="form-control"
+					id="tmio1Sitio1" placeholder="Sitio" /> <span
+					th:if="${#fields.hasErrors('sitioruta.tmio1Sitio1')}"
+					th:errors="*{sitio.tmio1Sitio1}" class="text-danger"></span>
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="tmio1Ruta1" class="col-form-label">Ruta</label> <input
+					type="text" readonly="readonly"
+					th:field="*{sitioruta.tmio1Ruta1.numero}" class="form-control"
+					id="tmio1Ruta1" placeholder="Ruta" /> <span
+					th:if="${#fields.hasErrors('sitioruta.tmio1Ruta1')}"
+					th:errors="*{sitioruta.tmio1Ruta1}" class="text-danger"></span>
+			</div>
+
 			<div class="col-md-6">
+
 				<form action="#" th:action="@{/admin/update/sitio-ruta1}"
-					th:object="${sitioruta}" method="post">
+					th:object="${sitiorutaPK}" method="post">
 					<div class="row">
 
+						<input type="hidden" readonly="readonly" th:field="*{hash}"
+							class="form-control" id="id" placeholder="Sitio" />
 						<div class="form-group col-md-6">
 							<label for="idSitio" class="col-form-label">Sitios</label> <select
-								class="form-control-range" th:field="*{sitioruta.id.idSitio}">
+								class="form-control-range" th:field="*{idSitio}">
 								<option th:each="sitio : ${sitios}" th:value="${sitio.id}"
 									class="form-control" th:text="${sitio.nombre}"
 									th:selected="${sitiorutaPK.idSitio=sitio.id}"></option>
@@ -36,13 +58,13 @@
 
 						<div class="form-group col-md-6">
 							<label for="idRuta" class="col-form-label">Rutas</label> <select
-								class="form-control-range" th:field="*{sitioruta.id.idRuta}">
+								class="form-control-range" th:field="*{idRuta}">
 								<option th:each="ruta : ${rutas}" th:value="${ruta.id}"
 									class="form-control" th:text="${ruta.numero}"
 									th:selected="${sitiorutaPK.idRuta=ruta.id}"></option>
 							</select>
-						</div> 
-						
+						</div>
+
 
 
 					</div>

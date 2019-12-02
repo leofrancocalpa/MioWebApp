@@ -109,24 +109,32 @@ public class ServicioController {
 		return "search/servicio";
 	}
 
-	@GetMapping("/operator/update/service/{id}")
-	public String showUpdateForm(@PathVariable("id") int id, Model model) {
-		Tmio1Servicio serv = servService.findByHashCode(id);
+	@PostMapping("/operator/update/service")
+	public String showUpdateForm(@Valid Tmio1Servicio serv,Model model,
+			@RequestParam(value = "action", required = true) String action) {
+//		Tmio1Servicio serv = servService.findByHashCode(id);
 		if (serv == null)
-			throw new IllegalArgumentException("Invalid user Id:" + id);
+			throw new IllegalArgumentException("Invalid user Id:");
+		
+		if(action.equals("Cancel")) {
+			return "redirect:/app/services";
+		}
 		
 		model.addAttribute("servicioPK", serv.getId());
 		model.addAttribute("buses", busService.findAll());
 		model.addAttribute("rutas", rutaService.findAll());
 		model.addAttribute("conductores", conductorService.findAll());
 		model.addAttribute("servicio", serv);
-		return "search/updateservicio";
+		
+		return "update/updateservicio";
 	}
 	
-	@PostMapping("/operator/update/save/service")
+	@PostMapping("/operator/update/service1")
 	public String updateService(Model model, Tmio1ServicioPK servPK, BindingResult bindingResult,
 			@RequestParam(value = "action", required = true) String action) {
 		
+		Tmio1Servicio serv = servService.findByHashCode(servPK.getHash());
+
 		System.out.println(servPK.getHash());
 		System.out.println(servPK.hashCode());
 		if (action.equals("Cancel")) {
@@ -134,9 +142,10 @@ public class ServicioController {
 			model.addAttribute("buses", busService.findAll());
 			model.addAttribute("rutas", rutaService.findAll());
 			model.addAttribute("conductores", conductorService.findAll());
+			model.addAttribute("servicio", serv);
 			return "redirect:/app/services";
 		}
-		Tmio1Servicio serv = servService.findByHashCode(servPK.getHash());
+		System.out.println(servPK.getHash()+">>>");
 		servService.deleteService(serv);
 		servPK.setHash(servPK.hashCode());
 		serv.setTmio1Bus(busService.findById(servPK.getIdBus()));
